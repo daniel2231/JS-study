@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    var body1=document.body;
+    var table=document.createElement('table');
+    var cans=[];
+    var lines=[];
+    var turn='X';
+
+    var callback= function(e){
+        var hline=lines.indexOf(e.target.parentNode);   
+        console.log(hline);
+        var hcan=cans[hline].indexOf(e.target);
+        console.log(hcan);
+        if(cans[hline][hcan].textContent !== ''){
+            console.log('빈칸이 아님');
+        }else{
+            console.log('빈칸입니다');
+            cans[hline][hcan].textContent=turn;
+            var allture=false;
+            if(cans[hline][0].textContent===turn && cans[hline][1].textContent===turn && cans[hline][2].textContent==turn){
+                allture=true;
+            } //가로줄 검사
+        
+            if(cans[0][hcan].textContent===turn &&cans[1][hcan].textContent===turn&&cans[2][hcan].textContent===turn){
+                allture=true;
+            } //세로줄 검사
+        
+            if(hcan-hline===0 || Math.abs(hcan-hline)===2){
+                if(cans[0][0].textContent===turn &&cans[1][1].textContent===turn && cans[2][2].textContent===turn){
+                    allture=true;
+                }
+                if(cans[0][2].textContent===turn &&cans[1][1].textContent===turn&&cans[2][0].textContent===turn){
+                    allture=true;
+                }
+            } // 대각선 검사.
+        
+            if(allture){
+                alert(turn + '님이 승리!');
+                turn ='X';
+                cans.forEach(function(line){
+                    line.forEach(function(can){
+                        can.textContent='';
+                    });
+                });
+            }else{
+            if(turn==='X'){
+                turn='O';
+            }else{
+                turn='X';
+            }}
+            
+        } 
+    };
+    for(var i=0; i<3; i+=1){
+        var line=document.createElement('tr');
+        lines.push(line);
+        cans.push([]);
+        for(var j=0; j<3; j+=1){
+        var can=document.createElement('td');
+        can.addEventListener('click', callback);
+        cans[i].push(can);
+        line.appendChild(can);   
+        }
+        table.appendChild(line);
+    }
+
+    body1.appendChild(table);
+</script>
+</html>

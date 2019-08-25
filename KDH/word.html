@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form>시작단어: <input id="startingWord"></form>
+    <button id="submitSWbtn">Submit Starting Word</button>
+
+    <div id="display" style="margin: 90px;"></div>
+
+    <form>단어: <input id="answer"></form>
+    <button id="submitA">Submit answer</button>
+</body>
+<script>
+    let word
+    function startGame() {
+        var startingWord = document.getElementById("startingWord").value;
+        if (startingWord === "") {
+            alert('시작 언어가 필요합니다');
+        } else {
+            word = startingWord;
+            document.getElementById('display').innerHTML = word;
+        }
+    }
+
+    function proceedGame() {
+        var answer = document.getElementById("answer").value;
+            if (word[word.length - 1] === answer[0]) {
+                alert('딩동댕')
+                word = answer;
+                document.getElementById('display').innerHTML = word;
+            } else {
+                alert('땡')
+            }
+    }
+
+    document.getElementById("submitSWbtn").addEventListener("click", startGame)
+    document.getElementById("submitA").addEventListener("click", proceedGame)
+</script>
+</html>

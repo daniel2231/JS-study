@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="displayQuestion"></div>
+    <form>
+        <input id="answer"><button id="submitBTN" type="button">submit</button>
+    </form>
+    <div id="displayAnswer"></div>
+</body>
+<script>
+    //random 숫자를 구하는 함수
+    function getRandomInt() {
+        return Math.floor(Math.random() * 10);
+    };
+
+    let a = getRandomInt();
+    let b = getRandomInt();
+    let question = `${a} times ${b} is?`;
+    document.getElementById("displayQuestion").innerHTML = question;
+    let c = a * b;
+    console.log(c)
+
+    //정답을 체크해주는 함수
+    function calculateAnwser() {
+        let correct = "You are correct! New question will appear shortly.";
+        let wrong = "You are wrong! Try again!";
+        let answer = Number(document.getElementById("answer").value); //Number()는 string을 number로 바꿔줍니다
+        if (answer === c){
+            document.getElementById("displayAnswer").innerHTML = correct;
+            setInterval(function(){document.location.reload(true)}, 3000)
+        } else {
+            document.getElementById("displayAnswer").innerHTML = wrong;
+        }
+    }
+    document.getElementById('submitBTN').addEventListener("click", calculateAnwser);
+</script>
+</html>
