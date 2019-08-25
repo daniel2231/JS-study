@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body onload="gameStart()">
+    <div style="height: 200px; width: 100px">
+        <img src="" id="display">
+    </div>
+    <br>
+    <button id="rock">rock</button>
+    <button id="scissor">scissor</button>
+    <button id="paper">paper</button>
+    <button id="reset">reset</button>
+    <div id="result"></div>
+</body>
+<script>
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; 
+    }
+    let display = document.getElementById("display");
+    let rock = 1;
+    let scissor = 2;
+    let paper = 3;
+    let rockButton = document.getElementById("rock");
+    let scissorButton = document.getElementById("scissor");
+    let paperButton = document.getElementById("paper");
+    let resetButton = document.getElementById("reset");
+    let userChoice;
+    let computerChoice = getRandomInt(1,4);
+    let result = [];
+    
+    function gameStart() {
+        result.push(computerChoice);
+        console.log("i was here")
+    }
+    
+    function disableBtn() {
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorButton.disabled = true;
+    }
+
+    function getRock() { 
+        display.src = "picturesRSP/rock.png";
+        result.push(rock)
+        disableBtn();
+        getResult();
+    }
+    function getScissor() { 
+        display.src = "picturesRSP/scissor.png";
+        result.push(scissor)
+        disableBtn();
+        getResult();
+    }
+    function getPaper() { 
+        display.src = "picturesRSP/paper.png"; 
+        result.push(paper)
+        disableBtn();
+        getResult();
+    }
+    
+    function getResult() {
+        if ((result === [1,1]) || (result === [2,2]) || (result === [3,3])) {
+            document.getElementById("result").innerHTML = "Its a Draw!"
+        }
+    }
+
+    function resetGame() {
+        location.reload(true);
+        console.log("I was Here")
+    }
+
+    rockButton.addEventListener("click", getRock)
+    scissorButton.addEventListener("click", getScissor)
+    paperButton.addEventListener("click", getPaper)
+    resetButton.addEventListener("click", resetGame)
+    
+</script>
+</html>
